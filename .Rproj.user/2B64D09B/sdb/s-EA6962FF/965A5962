@@ -1,0 +1,18 @@
+{
+    "contents" : "---\ntitle: \"test_kable\"\noutput: html_document\n---\n\nThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.\n\nWhen you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:\n\n```{r, echo=FALSE}\n# load(\"./kables.rda\")\n```\n\n```{r, echo=FALSE}\nload(\"./kables.rda\")\nk1\nk2\nk3\nk4\n```\n\nYou can also embed plots, for example:\n\n",
+    "created" : 1444917351571.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "152767799",
+    "id" : "965A5962",
+    "lastKnownWriteTime" : 1444918746,
+    "path" : "V:/Works/Research_Data/Doorae/R/test_kable.Rmd",
+    "project_path" : "R/test_kable.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}

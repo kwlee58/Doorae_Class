@@ -1,0 +1,19 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle : \"tapply vs aggregate\"\nauthor : \"coop2711\"\ndate : \"`r Sys.Date()`\"\noutput: html_document\n---\n\n```{r, library-packages}\nlibrary(pander)\nlibrary(knitr)\nlibrary(RCurl)\nlibrary(data.table)\n# panderOptions()\npanderOptions(\"table.split.table\", Inf)\noptions(width=180)\n```\n\n```{r, tapply-pander}\ngithubURL <- \"https://github.com/kwlee58/Doorae/R/doorae_new1015.rda\"\n# load(url(githubURL))\ntmpfile <- tempfile()\ndownload.file(githubURL, destfile=tmpfile, method=\"curl\")\nurl.data <- fread(tmpfile, ...)\nload(url.data)\n# getURLContent(githubURL, binary=TRUE)\n#load(\"~/Dropbox/Works/Research_Data/Doorae/R/doorae_new.rda\")\n(tapply.ys <- tapply(doorae$\"업력\", doorae$\"공동체상태\", summary))\ntapply.ys[[1]]\ntapply.ys[1]\nstr(tapply.ys[1])\nstr(tapply.ys[[1]])\nnames(tapply.ys[[1]])\nnames(tapply.ys[[1]]) <- c(\"최소값\", \"제1사분위수\", \"중위수\", \"산술평균\", \"제3사분위수\", \"최대값\")\nnames(tapply.ys[[2]]) <- c(\"최소값\", \"제1사분위수\", \"중위수\", \"산술평균\", \"제3사분위수\", \"최대값\")\ntapply.ys\npander(tapply.ys)\n```\n\n```{r, aggregate-kable}\ndoorae.ag <- aggregate(업력~공동체상태, data=doorae, summary)\nnames(aggregate(업력~공동체상태, data=doorae, summary))\nxtabs(업력~공동체상태, doorae.ag)\ndoorae.xtab <- xtabs(업력~공동체상태, doorae.ag)\nstr(doorae.xtab)\nrownames(doorae.xtab)\ncolnames(doorae.xtab)\ndimnames(doorae.xtab)<-list(\"공동체상태\"=rownames(doorae.xtab), \"업력\"=names(tapply.ys[[1]]))\nstr(doorae.xtab)\nkable(xtabs(업력~공동체상태, doorae.ag), caption=\"<공동체상태와 업력>\")\nkable(doorae.xtab, caption=\"<공동체상태와 업력>\")\n```\n\n",
+    "created" : 1445037883072.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "304061649",
+    "id" : "FAF1765C",
+    "lastKnownWriteTime" : 1445276269,
+    "path" : "~/Desktop/test_pander.Rmd",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 0,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

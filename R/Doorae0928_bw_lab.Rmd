@@ -9,9 +9,9 @@ output: html_document
 ### 기초자료
 
 ```{r, echo=FALSE, message=FALSE}
-# getwd()
-load("./doorae_new1015.rda")
-load("./coord.rda")
+getwd()
+load("~/Dropbox/Works/Class/Case_studies_in_stat/R.WD/Doorae_Class/R/doorae_new1015.rda")
+load("~/Dropbox/Works/Class/Case_studies_in_stat/R.WD/Doorae_Class/R/coord.rda")
 # library(xtable)
 # library(stargazer)
 library(knitr)
@@ -439,18 +439,18 @@ tapply(doorae$"업력", doorae$"공동체상태", summary)
 * 공동체 상태별 5숫자 요약 및 이상점 파악 
     * '아름다운인제관광'과 '예그리나'가 예외적으로 오랜 업력
 
-```{r, echo=FALSE, fig.width=5, fig.height=5}
+```{r, echo=FALSE, fig.width=6, fig.height=6}
 # plot(x=doorae$"공동체상태", y=doorae$"업력", main="공동체상태와 업력")
 # text(x=c(1.5, 2.3), y=c(12.3, 11.7), labels=doorae$"조직명"[c(21,63)])
 library(ggplot2)
 library(grid)
 source("theme_kr_Dotum.R")
-box.1 <- ggplot(doorae.ys, aes(x=status, y=years)) + geom_boxplot() 
-box.2 <- box.1 + theme_bw() + theme.kr.Dotum
-box.3 <- box.2 + ggtitle("공동체상태와 업력") + xlab("공동체상태") + ylab("업력(년)") 
-box.4 <- box.3 + scale_x_discrete(labels=c("창업준비", "경영개선")) 
-box.5 <- box.4 + annotate("text", x=c(1, 2), y=c(12.2, 13), label=c("예그리나", "아름다운인제관광"), size=3.5, family="HCR Dotum")
-box.5
+(box.1 <- ggplot(doorae.ys, aes(x=status, y=years)) + geom_boxplot())
+(box.2 <- box.1 + theme_bw() + theme.kr.Dotum)
+(box.3 <- box.2 + ggtitle("공동체상태와 업력") + xlab("공동체상태") + ylab("업력(년)"))
+(box.4 <- box.3 + scale_x_discrete(labels=c("창업준비", "경영개선")))
+(box.5 <- box.4 + annotate("text", x=c(1.5, 2.3), y=c(12.3, 11.7), label=c("예그리나", "아름다운인제관광"), size=3.5, family="HCR Dotum"))
+#box.5
 ```
 
 -----

@@ -10,8 +10,8 @@ output: html_document
 
 ```{r, echo=FALSE, message=FALSE}
 # getwd()
-load("doorae_new.rda")
-load("coord.rda")
+load("~/Dropbox/Works/Research_Data/Doorae/R/doorae_new.rda")
+load("~/Dropbox/Works/Research_Data/Doorae-master/R/coord.rda")
 library(xtable)
 library(stargazer)
 library(knitr)
@@ -27,8 +27,9 @@ options(xtable.comment=FALSE)
 ```{r, echo=FALSE}
 doorae <- doorae0924
 doorae.ys <- doorae0924.ys
-str.doorae.1 <- str(doorae[, 1:24])
-pander(list(str.doorae.1))
+str(doorae[, 1:24])
+# str.doorae.1 <- str(doorae[, 1:24])
+# pander(list(str.doorae.1))
 ```
 
 -----
@@ -45,8 +46,9 @@ pander(list(str.doorae.1))
 ### 성과자료
 
 ```{r, echo=FALSE}
-str.doorae.2 <- str(doorae[, 25:54])
-pander(list(str.doorae.2))
+str(doorae[, 25:54])
+# str.doorae.2 <- str(doorae[, 25:54])
+# pander(list(str.doorae.2))
 ```
 
 -----
@@ -415,7 +417,7 @@ pander(tapply(doorae$"업력", doorae$"공동체상태", summary))
 ```{r, echo=FALSE, fig.width=5, fig.height=5}
 # plot(x=doorae$"공동체상태", y=doorae$"업력", main="공동체상태와 업력")
 # text(x=c(1.5, 2.3), y=c(12.3, 11.7), labels=doorae$"조직명"[c(21,63)])
-source("theme_kr_ASGN.R")
+source("~/Dropbox/Works/Research_Data/Doorae-master/R/theme_kr_ASGN.R")
 box.1 <- ggplot(doorae.ys, aes(x=status, y=years)) + geom_boxplot() 
 box.2 <- box.1 + theme_bw() + theme.kr.ASGN
 box.3 <- box.2 + ggtitle("공동체상태와 업력") + xlab("공동체상태") + ylab("업력(년)") 
@@ -581,4 +583,4 @@ kable(doorae[o.sales.15, v.names.s.15][1:20, ], row.names=FALSE, col.names=c.nam
 
 ```{r}
 doorae0928 <- doorae
-save.image("doorae_new.rda")
+# save.image("doorae_new.rda")

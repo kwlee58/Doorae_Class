@@ -73,7 +73,24 @@ img {
 <h4 class="date"><em>2015-11-04</em></h4>
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#tapply-vs-aggregate"><span class="toc-section-number">1</span> tapply vs aggregate</a><ul>
+<li><a href="#kable-and-pander"><span class="toc-section-number">1.1</span> kable and pander</a><ul>
+<li><a href="#packages"><span class="toc-section-number">1.1.1</span> Packages</a></li>
+<li><a href="#tapply"><span class="toc-section-number">1.1.2</span> tapply</a></li>
+<li><a href="#aggregate"><span class="toc-section-number">1.1.3</span> aggregate</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
 
+<div id="tapply-vs-aggregate" class="section level1">
+<h1><span class="header-section-number">1</span> tapply vs aggregate</h1>
+<div id="kable-and-pander" class="section level2">
+<h2><span class="header-section-number">1.1</span> kable and pander</h2>
+<div id="packages" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> Packages</h3>
 <pre class="r"><code>getwd()</code></pre>
 <pre><code>## [1] &quot;/Users/coop2711/Desktop/Works/Class/Case_studies_in_stat/R.WD/Doorae_Class/R&quot;</code></pre>
 <pre class="r"><code>library(pander)
@@ -84,7 +101,10 @@ library(RCurl)</code></pre>
 # panderOptions()
 panderOptions(&quot;table.split.table&quot;, Inf)
 options(width=180)</code></pre>
-<pre class="r"><code># githubURL &lt;- &quot;https://github.com/kwlee58/Doorae/R/doorae_new1015.rda&quot;
+</div>
+<div id="tapply" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> tapply</h3>
+<pre class="r"><code># githubURL &lt;- &quot;https://github.com/kwlee58/Doorae/R/doorae_new.rda&quot;
 # load(url(githubURL))
 # tmpfile &lt;- tempfile()
 # download.file(githubURL, destfile=tmpfile, method=&quot;curl&quot;)
@@ -94,13 +114,72 @@ options(width=180)</code></pre>
 # load(&quot;~/Desktop/Works/Class/Case_studies_in_stat/R.WD/Doorae_Class/R/doorae_new1015.rda&quot;)
 load(&quot;~/Desktop/Works/Class/Case_studies_in_stat/R.WD/Doorae_Class/R/doorae_new.rda&quot;)
 tapply.ys &lt;- tapply(doorae$&quot;업력&quot;, doorae$&quot;공동체상태&quot;, summary)
-tapply.ys[[1]]</code></pre>
-<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    1.40    2.65    4.60    5.00    6.20   12.50</code></pre>
-<pre class="r"><code>tapply.ys[1]</code></pre>
-<pre><code>## $경영개선
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    1.40    2.65    4.60    5.00    6.20   12.50</code></pre>
+pander(tapply.ys[[1]])</code></pre>
+<table>
+<colgroup>
+<col width="9%"></col>
+<col width="13%"></col>
+<col width="12%"></col>
+<col width="9%"></col>
+<col width="13%"></col>
+<col width="8%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Min.</th>
+<th align="center">1st Qu.</th>
+<th align="center">Median</th>
+<th align="center">Mean</th>
+<th align="center">3rd Qu.</th>
+<th align="center">Max.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1.4</td>
+<td align="center">2.65</td>
+<td align="center">4.6</td>
+<td align="center">5</td>
+<td align="center">6.2</td>
+<td align="center">12.5</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>pander(tapply.ys[1])</code></pre>
+<ul>
+<li><p><strong>경영개선</strong>:</p>
+<table>
+<colgroup>
+<col width="9%"></col>
+<col width="13%"></col>
+<col width="12%"></col>
+<col width="9%"></col>
+<col width="13%"></col>
+<col width="8%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Min.</th>
+<th align="center">1st Qu.</th>
+<th align="center">Median</th>
+<th align="center">Mean</th>
+<th align="center">3rd Qu.</th>
+<th align="center">Max.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1.4</td>
+<td align="center">2.65</td>
+<td align="center">4.6</td>
+<td align="center">5</td>
+<td align="center">6.2</td>
+<td align="center">12.5</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+<!-- end of list -->
 <pre class="r"><code>str(tapply.ys[1])</code></pre>
 <pre><code>## List of 1
 ##  $ 경영개선:Classes 'summaryDefault', 'table'  Named num [1:6] 1.4 2.65 4.6 5 6.2 12.5
@@ -108,8 +187,8 @@ tapply.ys[[1]]</code></pre>
 <pre class="r"><code>str(tapply.ys[[1]])</code></pre>
 <pre><code>## Classes 'summaryDefault', 'table'  Named num [1:6] 1.4 2.65 4.6 5 6.2 12.5
 ##   ..- attr(*, &quot;names&quot;)= chr [1:6] &quot;Min.&quot; &quot;1st Qu.&quot; &quot;Median&quot; &quot;Mean&quot; ...</code></pre>
-<pre class="r"><code>names(tapply.ys[[1]])</code></pre>
-<pre><code>## [1] &quot;Min.&quot;    &quot;1st Qu.&quot; &quot;Median&quot;  &quot;Mean&quot;    &quot;3rd Qu.&quot; &quot;Max.&quot;</code></pre>
+<pre class="r"><code>pander(names(tapply.ys[[1]]))</code></pre>
+<p><em>Min.</em>, <em>1st Qu.</em>, <em>Median</em>, <em>Mean</em>, <em>3rd Qu.</em> and <em>Max.</em></p>
 <pre class="r"><code>names(tapply.ys[[1]]) &lt;- c(&quot;최소값&quot;, &quot;제1사분위수&quot;, &quot;중위수&quot;, &quot;산술평균&quot;, &quot;제3사분위수&quot;, &quot;최대값&quot;)
 names(tapply.ys[[2]]) &lt;- c(&quot;최소값&quot;, &quot;제1사분위수&quot;, &quot;중위수&quot;, &quot;산술평균&quot;, &quot;제3사분위수&quot;, &quot;최대값&quot;)
 tapply.ys</code></pre>
@@ -120,7 +199,75 @@ tapply.ys</code></pre>
 ## $창업준비
 ##      최소값 제1사분위수      중위수    산술평균 제3사분위수      최대값 
 ##       0.200       1.000       1.500       1.694       1.600      11.800</code></pre>
-<pre class="r"><code># pander(tapply.ys)</code></pre>
+<pre class="r"><code>pander(tapply.ys)</code></pre>
+<ul>
+<li><p><strong>경영개선</strong>:</p>
+<table>
+<colgroup>
+<col width="12%"></col>
+<col width="19%"></col>
+<col width="12%"></col>
+<col width="15%"></col>
+<col width="19%"></col>
+<col width="11%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">최소값</th>
+<th align="center">제1사분위수</th>
+<th align="center">중위수</th>
+<th align="center">산술평균</th>
+<th align="center">제3사분위수</th>
+<th align="center">최대값</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1.4</td>
+<td align="center">2.65</td>
+<td align="center">4.6</td>
+<td align="center">5</td>
+<td align="center">6.2</td>
+<td align="center">12.5</td>
+</tr>
+</tbody>
+</table></li>
+<li><p><strong>창업준비</strong>:</p>
+<table>
+<colgroup>
+<col width="12%"></col>
+<col width="19%"></col>
+<col width="12%"></col>
+<col width="15%"></col>
+<col width="19%"></col>
+<col width="11%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">최소값</th>
+<th align="center">제1사분위수</th>
+<th align="center">중위수</th>
+<th align="center">산술평균</th>
+<th align="center">제3사분위수</th>
+<th align="center">최대값</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0.2</td>
+<td align="center">1</td>
+<td align="center">1.5</td>
+<td align="center">1.694</td>
+<td align="center">1.6</td>
+<td align="center">11.8</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+<!-- end of list -->
+</div>
+<div id="aggregate" class="section level3">
+<h3><span class="header-section-number">1.1.3</span> aggregate</h3>
 <pre class="r"><code>doorae.ag &lt;- aggregate(업력~공동체상태, data=doorae, summary)
 names(aggregate(업력~공동체상태, data=doorae, summary))</code></pre>
 <pre><code>## [1] &quot;공동체상태&quot; &quot;업력&quot;</code></pre>
@@ -219,6 +366,9 @@ str(doorae.xtab)</code></pre>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
 
 
 </div>

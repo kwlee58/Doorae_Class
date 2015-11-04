@@ -7,6 +7,11 @@ output:
     number_sections: yes
     toc: yes
 ---
+# tapply vs aggregate
+
+## kable and pander
+
+### packages
 
 ```{r, library-packages}
 getwd()
@@ -19,8 +24,10 @@ panderOptions("table.split.table", Inf)
 options(width=180)
 ```
 
+### tapply 
+
 ```{r, tapply-pander}
-# githubURL <- "https://github.com/kwlee58/Doorae/R/doorae_new1015.rda"
+# githubURL <- "https://github.com/kwlee58/Doorae/R/doorae_new.rda"
 # load(url(githubURL))
 # tmpfile <- tempfile()
 # download.file(githubURL, destfile=tmpfile, method="curl")
@@ -30,17 +37,18 @@ options(width=180)
 # load("~/Desktop/Works/Class/Case_studies_in_stat/R.WD/Doorae_Class/R/doorae_new1015.rda")
 load("~/Desktop/Works/Class/Case_studies_in_stat/R.WD/Doorae_Class/R/doorae_new.rda")
 tapply.ys <- tapply(doorae$"업력", doorae$"공동체상태", summary)
-tapply.ys[[1]]
-tapply.ys[1]
+pander(tapply.ys[[1]])
+pander(tapply.ys[1])
 str(tapply.ys[1])
 str(tapply.ys[[1]])
 names(tapply.ys[[1]])
 names(tapply.ys[[1]]) <- c("최소값", "제1사분위수", "중위수", "산술평균", "제3사분위수", "최대값")
 names(tapply.ys[[2]]) <- c("최소값", "제1사분위수", "중위수", "산술평균", "제3사분위수", "최대값")
 tapply.ys
-# pander(tapply.ys)
+pander(tapply.ys)
 ```
 
+### aggregate
 
 ```{r, aggregate-kable}
 doorae.ag <- aggregate(업력~공동체상태, data=doorae, summary)

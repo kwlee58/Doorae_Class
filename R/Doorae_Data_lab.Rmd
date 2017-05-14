@@ -1,13 +1,9 @@
 ---
 title: "Doorae_data"
 author: "coop711"
-date: "2015년 9월 28일"
+date: "`r Sys.Date()`"
 output: html_document
 ---
-
-# Doorae data preparation
-
-## Data reading
 
 ### Data 
 

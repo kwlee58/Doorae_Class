@@ -2,10 +2,7 @@
 title: "Doorae_data"
 author: "coop711"
 date: "2015년 9월 28일"
-output: 
-  html_document: 
-    number_sections: yes
-    toc: yes
+output: html_document
 ---
 
 # Doorae data preparation
@@ -21,8 +18,8 @@ output:
 ```{r, data_xlsx}
 library(xlsx)
 library(knitr)
-doorae0924.rest<-read.xlsx("../data/Data0924.xlsx", 1, colIndex=2:54, endRow=98, stringsAsFactors=TRUE, encoding = "UTF-8")
-doorae0924.name <- read.xlsx("../data/Data0924.xlsx", 1, colIndex=1, endRow=98, stringsAsFactors=FALSE, encoding = "UTF-8")
+doorae0924.rest <- read.xlsx("../data/Data0924.xlsx", 1, colIndex = 2:54, endRow = 98, stringsAsFactors = TRUE, encoding = "UTF-8")
+doorae0924.name <- read.xlsx("../data/Data0924.xlsx", 1, colIndex = 1, endRow = 98, stringsAsFactors = FALSE, encoding = "UTF-8")
 doorae0924 <- data.frame(doorae0924.name, doorae0924.rest)
 ```
 
@@ -49,7 +46,7 @@ kable(t(as.matrix(table(doorae0924$"시도"))))
 kable(t(as.matrix(table(doorae0924$"시도"))))
 ```
 
-### Data generation 
+### Data for Years in Business
 
 * 업력(years in business) 계산
 
@@ -65,12 +62,12 @@ str(doorae0924)
 * 사업자등록여부와 업력을 함께 새로운 data frame 으로
 
 ```{r, business registration}
-doorae0924$"사업자등록여부" <- factor(ifelse(doorae0924$"사업자등록" == "NA", "No", "Yes"), levels=c("Yes", "No"))
-doorae0924.ys <- data.frame(status=factor(doorae0924$"공동체상태", levels=c("창업준비", "경영개선")), years=doorae0924$"업력")
+doorae0924$"사업자등록여부" <- factor(ifelse(doorae0924$"사업자등록" == "NA", "No", "Yes"), levels = c("Yes", "No"))
+doorae0924.ys <- data.frame(status=factor(doorae0924$"공동체상태", levels = c("창업준비", "경영개선")), years = doorae0924$"업력")
 ```
 
 ### Save data
 
 ```{r save_image}
-save.image("./doorae_new_data.rda")
+save.image("./doorae_new_data.RData")
 ```                        

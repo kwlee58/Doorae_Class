@@ -10,17 +10,13 @@ output: html_document
 
 ```{r, echo=FALSE, message=FALSE}
 # getwd()
-load("doorae_new.rda")
+load("doorae_new.RData")
 load("coord.rda")
-library(xtable)
-# library(stargazer)
 library(knitr)
 library(ggplot2)
-# library(tables)
 library(pander)
 panderOptions("table.split.table", Inf)
-options(xtable.comment=FALSE)
-options(family="Apple SD Gothic Neo")
+# options(family = "Apple SD Gothic Neo")
 # ls()
 ```
 
@@ -32,16 +28,7 @@ str.doorae.1 <- str(doorae[, 1:24])
 pander(list(str.doorae.1))
 ```
 
------
-
------
-
------
-
------
-
------
-
+<P style = "page-break-before:always">
 
 ### 성과자료
 
@@ -50,16 +37,7 @@ str.doorae.2 <- str(doorae[, 25:54])
 pander(list(str.doorae.2))
 ```
 
------
-
------
-
------
-
------
-
------
-
+<P style = "page-break-before:always">
 
 ## 변수별 기초통계 및 요약
 
@@ -72,41 +50,7 @@ doorae.summary<-sapply(doorae[, -cols.no.summary], summary)
 pander(doorae.summary)
 ```
 
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
+<P style = "page-break-before:always">
 
 # 교차분석
 
@@ -114,31 +58,16 @@ pander(doorae.summary)
 
 ### 교차표
 
-```{r echo=FALSE, results='asis'}
-# status.vs.structure<-table(doorae$"공동체상태", doorae$"조직형태", dnn=c("공동체상태", "조직형태"))
-# print(xtable(status.vs.structure), type="html", html.table.attributes="border=0")
-# print(xtable(addmargins(status.vs.structure), digits=0), type="html", html.table.attributes="border=0")
-# print(xtable(prop.table(status.vs.structure, margin=1)*100, digits=1), type="html", html.table.attributes="border=0")
-```
-
 ```{r, echo=FALSE, message=FALSE}
-status.vs.structure<-table(doorae$"공동체상태", doorae$"조직형태", dnn=c("공동체상태", "조직형태"))
+status.vs.structure <- table(doorae$"공동체상태", doorae$"조직형태", dnn = c("공동체상태", "조직형태"))
 status.vs.structure.am <- addmargins(status.vs.structure)
 dimnames(status.vs.structure.am)[[1]][3] <- "계"
 dimnames(status.vs.structure.am)[[2]][3] <- "계"
-status.vs.structure.ap <- round(prop.table(status.vs.structure, margin=1)*100, digits=1)
-status.vs.structure.ap <-addmargins(status.vs.structure.ap)[1:2,]
+status.vs.structure.ap <- round(prop.table(status.vs.structure, margin = 1) * 100, digits = 1)
+status.vs.structure.ap <-addmargins(status.vs.structure.ap)[1:2, ]
 dimnames(status.vs.structure.ap)[[2]][3] <- "계"
-status.vs.structure.ap.2 <-addmargins(prop.table(status.vs.structure, margin=2)*100)[,1:2]
+status.vs.structure.ap.2 <-addmargins(prop.table(status.vs.structure, margin = 2) * 100)[ , 1:2]
 dimnames(status.vs.structure.ap.2)[[1]][3] <- "계"
-```
-
-```{r, echo=FALSE, results='asis'}
-# pander(status.vs.structure, caption="ㅇ공동체상태와 조직형태")
-# pander(status.vs.structure.am, digits=0, caption="ㅇ공동체상태와 조직형태(계)")
-# pander(prop.table(status.vs.structure, margin=1)*100, digits=1, caption="ㅇ공동체상태와 조직형태(%)")
-# pander(status.vs.structure.ap, digits=3, caption="ㅇ공동체상태와 조직형태(%, 계)")
-# pander(status.vs.structure.ap.2, digits=3, caption="ㅇ조직형태와 공동체상태(%, 계)")
 ```
 
 ```{r, echo=FALSE, results='asis'}
@@ -147,35 +76,7 @@ kable(as.matrix(status.vs.structure.ap), caption="ㅇ공동체상태와 조직�
 kable(as.matrix(status.vs.structure.ap.2), caption="ㅇ조직형태와 공동체상태(%, 계)")
 ```
 
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
-
-----
+<P style = "page-break-before:always">
 
 ### 모자이크 플롯
 
@@ -183,18 +84,21 @@ kable(as.matrix(status.vs.structure.ap.2), caption="ㅇ조직형태와 공동체
     * 경영개선 상태에서 법인격을 갖춘 공동체사업의 비율이 창업준비 상태에서 법인격을 갖춘 공동체사업의 비율보다 압도적으로 많다는 점에 유의.
 
 ```{r, echo=FALSE, fig.width=4, fig.height=4}
-mosaicplot(status.vs.structure, color=rainbow(2), main="공동체상태와 조직형태")
-text(coord.text, labels=t(status.vs.structure))
+par(family = "HCR Dotum LVT")
+mosaicplot(status.vs.structure, color = rainbow(2), main = "공동체상태와 조직형태")
+text(coord.text, labels = t(status.vs.structure))
 ```
 
 * 조직형태와 공동체상태
     * 이는 거꾸로 법인격을 갖춘 공동체사업체 중에 경영개선 상태에 들어간 비율이 압도적으로 많다는 것으로 이해할 수도 있음.
 
 ```{r, echo=FALSE, fig.width=4, fig.height=4}
+par(family = "HCR Dotum LVT")
 mosaicplot(t(status.vs.structure), color=rainbow(2), main="조직형태와 공동체상태")
 text(coord.text.1.2, labels=status.vs.structure)
 ```
 
+<P style = "page-break-before:always">
 
 ## 성장단계 구분에의 시사점
 
@@ -209,7 +113,6 @@ v.names <- c("공동체상태", "조직명", "busi.kr", "regi.kr", "성과_매�
 c.names <- c("공동체상태", "조직명", "사업착수여부", "사업자등록여부", "2014년매출", "2015년(3개월)매출")
 ```
 
-
 * 경영개선 상태의 법인 조직
     * 모두 사업에 착수하였고, 사업자등록도 마침. 매출도 대부분 발생
 
@@ -217,16 +120,7 @@ c.names <- c("공동체상태", "조직명", "사업착수여부", "사업자등
 kable(doorae[corporate.bi, v.names], row.names= FALSE, col.names=c.names)
 ```
 
------
-
------
-
------
-
------
-
------
-
+<P style = "page-break-before:always">
 
 * 경영개선 상태의 임의단체 조직 
     * 임의단체인 경우가 소수 있으나 모두 사업에 착수하였고, 사업자등록도 마침. 모두 매출 발생
@@ -242,6 +136,10 @@ kable(doorae[noncorporate.bi, v.names], row.names= FALSE, col.names=c.names)
 kable(doorae[corporate.bp, v.names], row.names= FALSE, col.names=c.names)
 ```
 
+<!--
+<P style = "page-break-before:always">
+-->
+
 * 창업준비 상태의 임의단체 조직 
     * 대부분 사업미착수(83%)이고, 사업자미등록(93%)인 상태임. 매출 극히 일부에서 발생하는 것으로 보고하고 있으나 개인사업자 명의의 실적임. 
 
@@ -249,39 +147,7 @@ kable(doorae[corporate.bp, v.names], row.names= FALSE, col.names=c.names)
 kable(doorae[noncorporate.bp, v.names], row.names= FALSE, col.names=c.names)
 ```
 
------
-
------
-
------
-
------
-
------
-
------
-
------
-
------
-
------
-
------
-
------
-
------
-
------
-
------
-
------
-
------
-
------
+<P style = "page-break-before:always">
 
 ### 3원 교차분석
 
@@ -290,38 +156,8 @@ comm_stat.org_str.reg.ftbl <- ftable(table("공동체상태 :"=doorae$"공동체
 comm_stat.org_str.busi.ftbl <- ftable(table("공동체상태 :"=doorae$"공동체상태", "조직형태 :"=doorae$"조직형태", "사업착수여부 :"=doorae$busi.kr))
 ```
 
-
-```{r, echo=FALSE, results='asis'}
-# pander(comm_stat.org_str.reg.ftbl)
-```
-
-```{r, echo=FALSE, results='asis'}
-kable(as.matrix(comm_stat.org_str.reg.ftbl), caption = "* 공동체상태/조직형태와 사업자등록여부 ")
-```
-
-```{r, echo=FALSE, results='asis'}
-# stargazer(format(comm_stat.org_str.reg.ftbl, quote=FALSE, justify="right"), type="html")
-```
-
-----------
-
-
-```{r, echo=FALSE, results='asis'}
-# pander(round(prop.table(comm_stat.org_str.reg.ftbl, margin=1)*100, digits=1))
-```
-
 ```{r, echo=FALSE, results='asis'}
 kable(as.matrix(round(prop.table(comm_stat.org_str.reg.ftbl, margin=1)*100, digits=1)), caption = "* 공동체상태/조직형태와 사업자등록여부(%)")
-```
-
-```{r, echo=FALSE, results='asis'}
-# stargazer(format(round(prop.table(comm_stat.org_str.reg.ftbl, margin=1)*100, digits=1), quote=FALSE, justify="right"), type="html")
-```
-
-----------
-
-```{r, echo=FALSE, results='asis'}
-# pander(comm_stat.org_str.busi.ftbl)
 ```
 
 ```{r, echo=FALSE, results='asis'}
@@ -329,34 +165,20 @@ kable(as.matrix(comm_stat.org_str.busi.ftbl), caption = "* 공동체상태/조�
 ```
 
 ```{r, echo=FALSE, results='asis'}
-# stargazer(format(comm_stat.org_str.reg.ftbl, quote=FALSE, justify="right"), type="html")
-```
-
-----------
-
-```{r, echo=FALSE, results='asis'}
-# pander(round(prop.table(comm_stat.org_str.busi.ftbl, margin=1)*100, digits=1))
-```
-
-```{r, echo=FALSE, results='asis'}
 kable(as.matrix(round(prop.table(comm_stat.org_str.busi.ftbl, margin=1)*100, digits=1)), caption = "* 공동체상태/조직형태와 사업착수여부(%)")
 ```
 
-```{r, echo=FALSE, results='asis'}
-# stargazer(format(round(prop.table(comm_stat.org_str.busi.ftbl, margin=1)*100, digits=1), quote=FALSE, justify="right"), type="html")
-```
-
------
+<P style = "page-break-before:always">
 
 ## 공동체상태와 법인유형
 
 ### 교차표
 
 ```{r, results='asis', echo=FALSE}
-status.vs.corporate_type<-table(doorae$"공동체상태", doorae$"법인유형", dnn=c("공동체상태", "조직유형"))
+status.vs.corporate_type <- table(doorae$"공동체상태", doorae$"법인유형", dnn=c("공동체상태", "조직유형"))
 # kable(status.vs.corporate_type, caption="<공동체상태와 조직유형>")
 pander(status.vs.corporate_type, caption="<공동체상태와 조직유형>")
-````
+```
 
 ```{r, results='asis', echo=FALSE}
 stock.co<-which(doorae$"법인유형"=="주식회사")
@@ -367,10 +189,12 @@ pander(doorae[stock.co, c("공동체상태", "조직명")], caption="<주식회�
 ### 모자이크 플롯
 
 ```{r, echo=FALSE, fig.width=4.8, fig.height=4.8}
+par(family = "HCR Dotum LVT")
 mosaicplot(status.vs.corporate_type, color=rainbow(7), main="공동체상태와 조직유형", las=1)
 text(coord.text.2, labels=t(status.vs.corporate_type), cex=0.8)
 ```
 
+<P style = "page-break-before:always">
 
 ## 공동체상태와 사업아이템
 
@@ -399,10 +223,12 @@ kable(round(status.vs.business_item.p.am, digits=1), caption= "<공동체상태�
 ### 모자이크 플롯
 
 ```{r, echo=FALSE, fig.width=4.8, fig.height=4.8}
+par(family = "HCR Dotum LVT")
 mosaicplot(status.vs.business_item, color=rainbow(7), main="공동체상태와 사업아이템", las=1)
 text(coord.text.3, labels=t(status.vs.business_item), cex=0.8)
 ```
 
+<P style = "page-break-before:always">
 
 ## 공동체상태와 업력
 
@@ -424,11 +250,11 @@ pander(tapply(doorae$"업력", doorae$"공동체상태", summary))
 ```{r, echo=FALSE, fig.width=5, fig.height=5}
 # plot(x=doorae$"공동체상태", y=doorae$"업력", main="공동체상태와 업력")
 # text(x=c(1.5, 2), y=c(12.3, 12.3), labels=doorae$"조직명"[c(21,63)])
-source("theme_kr_ASGN.R")
-box.1 <- ggplot(doorae.ys, aes(x=status, y=years)) + theme_bw() + geom_boxplot() + theme.kr.ASGN 
+source("theme_kr_HCR.R")
+box.1 <- ggplot(doorae.ys, aes(x = status, y = years)) + theme_bw() + geom_boxplot() + theme.kr.ASGN 
 box.2 <- box.1 + ggtitle("공동체상태와 업력") + xlab("공동체상태") + ylab("업력(년)") 
-box.3 <- box.2 + scale_x_discrete(labels=c("창업준비", "경영개선")) 
-box.4 <- box.3 + annotate("text", x=c(1, 2), y=c(12.2, 13), label=c("예그리나", "아름다운인제관광"), size=3.5, family="AppleGothic")
+box.3 <- box.2 + scale_x_discrete(labels = c("창업준비", "경영개선")) 
+box.4 <- box.3 + annotate("text", x = c(1, 2), y = c(12.2, 13), label = c("예그리나", "아름다운인제관광"), size = 3.5, family = "HCR Dotum LVT")
 box.4
 ```
 
@@ -563,6 +389,8 @@ kable(doorae[o.visitors.14, v.names.v.14][1:20, ], row.names=FALSE, col.names=c.
 kable(doorae[o.visitors.15, v.names.v.15][1:20, ], row.names=FALSE, col.names=c.names.v.15)
 ```
 
+<P style = "page-break-before:always">
+
 ### 매출(2014)
 
 ```{r, results='asis', echo=FALSE}
@@ -575,9 +403,8 @@ kable(doorae[o.sales.14, v.names.s.14][1:20, ], row.names=FALSE, col.names=c.nam
 kable(doorae[o.sales.15, v.names.s.15][1:20, ], row.names=FALSE, col.names=c.names.s.15, align=c('l', 'l', 'r'))
 ```
 
-
 ### 자료 갈무리
 
 ```{r}
 doorae0928 <- doorae
-save.image("doorae_new.rda")
+save.image("doorae_new.RData")

@@ -241,10 +241,16 @@ kable(round(status.vs.business_item.p.am, digits=1), caption= "<공동체상태�
 
 ### 모자이크 플롯
 
-```{r, echo=FALSE, fig.width=4.8, fig.height=4.8}
+```{r, echo=FALSE, fig.width = 6, fig.height = 4.5}
 par(family = "HCR Dotum LVT")
-mosaicplot(status.vs.business_item, color=rainbow(7), main="공동체상태와 사업아이템", las=1)
-text(coord.text.3, labels=t(status.vs.business_item), cex=0.8)
+mosaic_gg(t(status.vs.business_item), 
+          base_family = "HCR Dotum LVT",
+          ggtitle = "공동체상태와 사업아이템",
+          xlab = "공동체상태",
+          ylab = "사업아이템",
+          fill.name = "사업아이템")
+# mosaicplot(status.vs.business_item, color=rainbow(7), main="공동체상태와 사업아이템", las=1)
+# text(coord.text.3, labels=t(status.vs.business_item), cex=0.8)
 ```
 
 <P style = "page-break-before:always">

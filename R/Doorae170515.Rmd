@@ -83,19 +83,32 @@ kable(as.matrix(status.vs.structure.ap.2), caption="ㅇ조직형태와 공동체
 * 공동체상태와 조직형태
     * 경영개선 상태에서 법인격을 갖춘 공동체사업의 비율이 창업준비 상태에서 법인격을 갖춘 공동체사업의 비율보다 압도적으로 많다는 점에 유의.
 
-```{r, echo=FALSE, fig.width=4, fig.height=4}
+```{r, echo=FALSE, fig.width = 6, fig.height = 4.5}
+source("./mosaic_gg.R")
 par(family = "HCR Dotum LVT")
-mosaicplot(status.vs.structure, color = rainbow(2), main = "공동체상태와 조직형태")
-text(coord.text, labels = t(status.vs.structure))
+mosaic_gg(status.vs.structure, 
+          base_family = "HCR Dotum LVT",
+          ggtitle = "공동체상태와 조직형태",
+          xlab = "조직형태",
+          ylab = "공동체상태",
+          fill.name = "공동체상태")
+# mosaicplot(status.vs.structure, color = rainbow(2), main = "공동체상태와 조직형태")
+# text(coord.text, labels = t(status.vs.structure))
 ```
 
 * 조직형태와 공동체상태
     * 이는 거꾸로 법인격을 갖춘 공동체사업체 중에 경영개선 상태에 들어간 비율이 압도적으로 많다는 것으로 이해할 수도 있음.
 
-```{r, echo=FALSE, fig.width=4, fig.height=4}
+```{r, echo=FALSE, fig.width = 6, fig.height = 4.5}
 par(family = "HCR Dotum LVT")
-mosaicplot(t(status.vs.structure), color=rainbow(2), main="조직형태와 공동체상태")
-text(coord.text.1.2, labels=status.vs.structure)
+mosaic_gg(t(status.vs.structure), 
+          base_family = "HCR Dotum LVT",
+          ggtitle = "조직형태와 공동체상태",
+          ylab = "조직형태",
+          xlab = "공동체상태",
+          fill.name = "조직형태")
+# mosaicplot(t(status.vs.structure), color=rainbow(2), main="조직형태와 공동체상태")
+# text(coord.text.1.2, labels=status.vs.structure)
 ```
 
 <P style = "page-break-before:always">
@@ -188,10 +201,16 @@ pander(doorae[stock.co, c("공동체상태", "조직명")], caption="<주식회�
 
 ### 모자이크 플롯
 
-```{r, echo=FALSE, fig.width=4.8, fig.height=4.8}
+```{r, echo=FALSE, fig.width = 6, fig.height = 4.5}
 par(family = "HCR Dotum LVT")
-mosaicplot(status.vs.corporate_type, color=rainbow(7), main="공동체상태와 조직유형", las=1)
-text(coord.text.2, labels=t(status.vs.corporate_type), cex=0.8)
+mosaic_gg(t(status.vs.corporate_type), 
+          base_family = "HCR Dotum LVT",
+          ggtitle = "공동체상태와 조직유형",
+          xlab = "조직유형",
+          ylab = "공동체상태",
+          fill.name = "조직유형")
+# mosaicplot(status.vs.corporate_type, color=rainbow(7), main="공동체상태와 조직유형", las=1)
+# text(coord.text.2, labels=t(status.vs.corporate_type), cex=0.8)
 ```
 
 <P style = "page-break-before:always">

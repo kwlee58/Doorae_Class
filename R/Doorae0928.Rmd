@@ -12,7 +12,7 @@ output: html_document
 # getwd()
 load("doorae_new.rda")
 load("coord.rda")
-library(xtable)
+# library(xtable)
 # library(stargazer)
 library(knitr)
 library(ggplot2)

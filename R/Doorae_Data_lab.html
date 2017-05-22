@@ -11,7 +11,7 @@
 
 <meta name="author" content="coop711" />
 
-<meta name="date" content="2017-05-17" />
+<meta name="date" content="2017-05-23" />
 
 <title>Doorae_data</title>
 
@@ -119,7 +119,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Doorae_data</h1>
 <h4 class="author"><em>coop711</em></h4>
-<h4 class="date"><em>2017-05-17</em></h4>
+<h4 class="date"><em>2017-05-23</em></h4>
 
 </div>
 
@@ -303,9 +303,9 @@ doorae0924$&quot;시도&quot;</code></pre>
 ##  $ 기타                  : num  0 1 0 0 0 4 4 2 0 0 ...</code></pre>
 <pre class="r"><code>years.in.business &lt;- round(as.numeric(difftime(Sys.Date(), doorae0924$&quot;설립일&quot;, units=&quot;days&quot;))/365, digits=1)
 str(years.in.business)</code></pre>
-<pre><code>##  num [1:97] 3 2.2 2 4.4 2 3.2 5.7 3.8 3.1 1.8 ...</code></pre>
+<pre><code>##  num [1:97] 3.1 2.2 2.1 4.4 2.1 3.2 5.8 3.8 3.1 1.8 ...</code></pre>
 <pre class="r"><code>head(years.in.business)</code></pre>
-<pre><code>## [1] 3.0 2.2 2.0 4.4 2.0 3.2</code></pre>
+<pre><code>## [1] 3.1 2.2 2.1 4.4 2.1 3.2</code></pre>
 <pre class="r"><code>doorae0924$&quot;업력&quot; &lt;- years.in.business
 str(doorae0924)</code></pre>
 <pre><code>## 'data.frame':    97 obs. of  55 variables:
@@ -363,7 +363,7 @@ str(doorae0924)</code></pre>
 ##  $ 사업실적_파일럿       : num  1 0 0 0 0 2 3 2 6 0 ...
 ##  $ 사업실적_관광공사     : num  0 0 0 0 0 3 3 1 0 0 ...
 ##  $ 기타                  : num  0 1 0 0 0 4 4 2 0 0 ...
-##  $ 업력                  : num  3 2.2 2 4.4 2 3.2 5.7 3.8 3.1 1.8 ...</code></pre>
+##  $ 업력                  : num  3.1 2.2 2.1 4.4 2.1 3.2 5.8 3.8 3.1 1.8 ...</code></pre>
 <ul>
 <li>사업자등록여부와 업력을 함께 새로운 data frame 으로</li>
 </ul>

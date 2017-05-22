@@ -13,6 +13,7 @@ load("doorae_new_data.RData")
 load("coord.rda")
 library(knitr)
 library(ggplot2)
+library(extrafont)
 library(pander)
 panderOptions("table.split.table", Inf)
 ```
@@ -41,8 +42,8 @@ options(width=132)
 options(digits=3)
 cols.no.summary.names <-c("설립일", "사업자등록", "업태", "종목", "소재지", "사업명", "아이디어", "대표상품") 
 cols.no.summary <- which(names(doorae) %in% cols.no.summary.names)
-doorae.summary <- sapply(doorae[, -cols.no.summary], summary)
-pander(doorae.summary)
+sapply(doorae[, -cols.no.summary], summary)
+# pander(doorae.summary)
 ```
 
 <P style = "page-break-before:always">
@@ -80,7 +81,6 @@ kable(as.matrix(status.vs.structure.ap.2), caption="ㅇ조직형태와 공동체
 
 ```{r, echo=FALSE, fig.width = 6, fig.height = 4.5}
 source("./mosaic_gg.R")
-par(family = "HCR Dotum LVT")
 mosaic_gg(status.vs.structure, 
           base_family = "HCR Dotum LVT",
           ggtitle = "공동체상태와 조직형태",
@@ -95,7 +95,6 @@ mosaic_gg(status.vs.structure,
     * 이는 거꾸로 법인격을 갖춘 공동체사업체 중에 경영개선 상태에 들어간 비율이 압도적으로 많다는 것으로 이해할 수도 있음.
 
 ```{r, echo=FALSE, fig.width = 6, fig.height = 4.5}
-par(family = "HCR Dotum LVT")
 mosaic_gg(t(status.vs.structure), 
           base_family = "HCR Dotum LVT",
           ggtitle = "조직형태와 공동체상태",
@@ -185,19 +184,18 @@ kable(as.matrix(round(prop.table(comm_stat.org_str.busi.ftbl, margin=1)*100, dig
 ```{r, results='asis', echo=FALSE}
 status.vs.corporate_type <- table(doorae$"공동체상태", doorae$"법인유형", dnn=c("공동체상태", "조직유형"))
 # kable(status.vs.corporate_type, caption="<공동체상태와 조직유형>")
-pander(status.vs.corporate_type, caption="<공동체상태와 조직유형>")
+kable(status.vs.corporate_type, caption="<공동체상태와 조직유형>")
 ```
 
 ```{r, results='asis', echo=FALSE}
 stock.co<-which(doorae$"법인유형"=="주식회사")
 # kable(doorae[stock.co, c("공동체상태", "조직명")], caption="<주식회사인 공동체사업체>")
-pander(doorae[stock.co, c("공동체상태", "조직명")], caption="<주식회사인 공동체사업체>")
+kable(doorae[stock.co, c("공동체상태", "조직명")], caption="<주식회사인 공동체사업체>")
 ```
 
 ### 모자이크 플롯
 
 ```{r, echo=FALSE, fig.width = 6, fig.height = 4.5}
-par(family = "HCR Dotum LVT")
 mosaic_gg(t(status.vs.corporate_type), 
           base_family = "HCR Dotum LVT",
           ggtitle = "공동체상태와 조직유형",
@@ -237,7 +235,6 @@ kable(round(status.vs.business_item.p.am, digits=1), caption= "<공동체상태�
 ### 모자이크 플롯
 
 ```{r, echo=FALSE, fig.width = 6, fig.height = 4.5}
-par(family = "HCR Dotum LVT")
 mosaic_gg(t(status.vs.business_item), 
           base_family = "HCR Dotum LVT",
           ggtitle = "공동체상태와 사업아이템",
@@ -258,8 +255,8 @@ mosaic_gg(t(status.vs.business_item),
 
 ### 요약표
 
-```{r, echo=FALSE, results='asis'}
-pander(tapply(doorae$"업력", doorae$"공동체상태", summary))
+```{r, echo=FALSE, results='markup'}
+tapply(doorae$"업력", doorae$"공동체상태", summary)
 ```
 
 ### Box Plot
@@ -319,7 +316,6 @@ years.df <- data.frame(years = years.x, ecdf.years = years.y)
 
 
 ```{r echo=FALSE, fig.width=4.5, fig.height=4.5}
-library(ggplot2)
 poly.1 <- ggplot(years.df, aes(x = years, y = ecdf.years)) + geom_path()
 poly.2 <- poly.1 + geom_polygon(alpha = 0.3, fill = "red") 
 poly.3 <- poly.2 + theme_bw() + theme.kr.HCR

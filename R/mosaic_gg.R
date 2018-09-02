@@ -6,6 +6,13 @@ function(tbl, base_family = "",
                       fill.name = ""){
 tbl.df <- as.data.frame(tbl)
 N <- length(levels(tbl.df[, 1]))
+RdYlBu <- brewer.pal(max(N, 3), "RdYlBu")
+Accent <- brewer.pal(max(N, 3), "Accent")
+Dark2 <- brewer.pal(max(N, 3), "Dark2")
+Paired <- brewer.pal(max(N, 3), "Paired")
+Set1 <- brewer.pal(max(N, 3), "Set1")
+Set2 <- brewer.pal(max(N, 3), "Set2")
+Set3 <- brewer.pal(max(N, 3), "Set3")
 tbl.sum <- tapply(tbl.df$Freq, tbl.df[, 2], sum)
 tbl.p.m <- prop.table(tbl.sum)
 tbl.p <- prop.table(tbl)
@@ -19,7 +26,7 @@ x.center <- tbl.p.m / 2 + c(0, cumsum(head(tbl.p.m, -1)))
 # x.center <- (cumsum(tbl.p.m) + c(0, head(cumsum(tbl.p.m), -1)))/2
 tbl.p.df$center <- x.center[match(tbl.p.df[, 2], names(x.center))]
 m1 <- ggplot(tbl.p.df, aes(x = center, y = height, width = width)) + 
-  geom_bar(aes(fill = tbl.df[1]), 
+  geom_bar(aes(fill = tbl.df[, 1]), 
            stat = "identity", 
            col = "white", 
            size = 1, 
@@ -55,7 +62,7 @@ m5 <- m4 +
                      breaks = y.breaks,
                      label = y.label) + 
   scale_fill_manual(name = fill.name, 
-                    values = rainbow(N)[N:1], 
+                    values = Set1[N:1], 
                     labels = tbl.df[[1]], 
                     guide = guide_legend()) +
   ggtitle(ggtitle) +
